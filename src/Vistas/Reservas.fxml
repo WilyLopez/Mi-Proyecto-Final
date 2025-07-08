@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPaneReservas" prefHeight="530.0" prefWidth="700.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ReservasController">
+    <stylesheets>
+        <URL value="@/Styles/reservas.css" />
+    </stylesheets>
+   <children>
+      <BorderPane layoutX="79.0" layoutY="58.0" prefHeight="530.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="719.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Gestión de Reservas">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <center>
+            <VBox prefHeight="392.0" prefWidth="719.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox maxHeight="200.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="415.0" text="DETALLES DE LA HABITACION">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="381.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="btnSelecionarHabitacion" mnemonicParsing="false" onAction="#seleccionarHabitacion" prefHeight="30.0" prefWidth="150.0" text="Seleccionar habitación" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox maxHeight="150.0" prefHeight="62.0" prefWidth="719.0" spacing="20.0">
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="86.0" prefWidth="491.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="491.0" spacing="14.0">
+                                 <children>
+                                    <Label prefHeight="18.0" prefWidth="62.0" text="Número: " />
+                                    <TextField fx:id="textNumeroHabitacion" prefHeight="26.0" prefWidth="103.0" />
+                                    <Label prefHeight="18.0" prefWidth="60.0" text="Estado: " />
+                                    <TextField fx:id="TextEstadoHabitacion" />
+                                    <Label prefHeight="18.0" prefWidth="60.0" text="Tipo:" />
+                                    <TextField fx:id="textTipoHabitacion" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="37.0" prefHeight="31.0" prefWidth="491.0" spacing="20.0">
+                                 <children>
+                                    <Label text="Detalles:" />
+                                    <TextField fx:id="textDetallesHabitacion" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="306.0" prefWidth="640.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="360.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="DATOS DEL CLIENTE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefWidth="110.0" text="DNI: " />
+                                    <TextField fx:id="textDNIHuesped" onAction="#buscarHuespedPorDNI" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefWidth="110.0" text="Nombre Completo: " />
+                                    <TextField fx:id="textNombreCompletoHuesped" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefWidth="110.0" text="Telefono: " />
+                                    <TextField fx:id="textTelefonoHuesped" prefHeight="26.0" prefWidth="110.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="125.0" prefHeight="35.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefWidth="110.0" text="Correo: " />
+                                    <TextField fx:id="textCorreoHuesped" prefHeight="26.0" prefWidth="297.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <VBox fx:id="VistaTablaServicioYProducto" prefHeight="200.0" prefWidth="100.0" visible="false" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TableView fx:id="TableProductoOServicio" prefHeight="200.0" prefWidth="200.0">
+                                      <columns>
+                                        <TableColumn fx:id="ColumnTipo" editable="false" prefWidth="39.999997317790985" text="Tipo" />
+                                        <TableColumn fx:id="ColumnNombre" editable="false" prefWidth="68.80002212524414" text="Nombre" />
+                                          <TableColumn fx:id="ColunmCantidad" prefWidth="60.800025939941406" text="Cantidad" />
+                                          <TableColumn fx:id="ColumnPrecioUnitario" prefWidth="52.800048828125" text="Precio U" />
+                                          <TableColumn fx:id="ColumnSubTotal" prefWidth="60.80003356933594" text="SubTotal" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="15.0" right="15.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="360.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="30.0" prefWidth="330.0">
+                                 <children>
+                                    <Label text="DATOS DEL ALOJAMIENTO">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="300.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="125.0" text="Precio habitación: " />
+                                    <TextField fx:id="textPrecioHabitacion" prefHeight="26.0" prefWidth="200.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="40.0" prefHeight="50.0" prefWidth="300.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="125.0" text="Fecha Entrada:" />
+                                    <DatePicker fx:id="DatePickerFechaEntrada" prefHeight="26.0" prefWidth="200.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="140.0" prefHeight="50.0" prefWidth="300.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="125.0" text="Hora entrada: " />
+                                    <TextField fx:id="textHoraEntrada" prefHeight="26.0" prefWidth="200.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="152.0" prefHeight="50.0" prefWidth="300.0">
+                                 <children>
+                                    <Label prefHeight="25.0" prefWidth="125.0" text="Fecha Salida:" />
+                                    <DatePicker fx:id="DatePickerFechaSalida" prefHeight="26.0" prefWidth="200.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="46.0" prefWidth="222.0">
+                                 <children>
+                                    <Label text="Total: " />
+                                    <TextField fx:id="textTotal" onAction="#calcularTotal" prefHeight="26.0" prefWidth="114.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="659.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarReserva" prefHeight="35.0" prefWidth="150.0" text="Cancelar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnRegistrarReservas" mnemonicParsing="false" onAction="#registrarServicio" prefHeight="35.0" prefWidth="150.0" text="Registrar Reserva">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnAgregarServicio" mnemonicParsing="false" onAction="#agregarServicio" prefHeight="35.0" prefWidth="150.0" text="Agregar Servicio">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnVerReservas" mnemonicParsing="false" onAction="#verTotaslasReservas" prefHeight="35.0" prefWidth="150.0" text="Ver todas">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+         <padding>
+            <Insets bottom="5.0" left="30.0" right="30.0" top="5.0" />
+         </padding>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="700.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.ProductosController">
+    <stylesheets>
+        <URL value="@/Styles/productos.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="176.0" layoutY="154.0" prefHeight="530.0" prefWidth="700.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="700.0">
+               <children>
+                  <Label text="GESTIÓN DE PRODUCTOS ">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="340.0">
+                     <children>
+                        <Label text="Ordenar Por: ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="CBoxOrdenar" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="340.0">
+                     <children>
+                        <Label text="Buscar Por Nombre: " />
+                        <TextField fx:id="textBuscarPorNombre" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <TableView fx:id="tableProducto" prefHeight="314.0" prefWidth="639.0">
+              <columns>
+                <TableColumn fx:id="ColumnNumero" prefWidth="47.20001143217087" text="N°" />
+                <TableColumn fx:id="ColumnNombreProducto" prefWidth="104.00000381469727" text="Nombre" />
+                  <TableColumn fx:id="ColumnTipoProducto" prefWidth="124.0" text="Tipo" />
+                  <TableColumn fx:id="ColumnDescripcion" prefWidth="273.60003662109375" text="Descripción" />
+                  <TableColumn fx:id="ColumnPrecioProducto" prefWidth="90.4000244140625" text="Precio" />
+              </columns>
+            </TableView>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Button fx:id="btnDeshacer" mnemonicParsing="false" onAction="#deshacerAccion" prefHeight="35.0" prefWidth="100.0" text="Deshacer">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnRehacer" mnemonicParsing="false" onAction="#rehacerAccion" prefHeight="35.0" prefWidth="100.0" text="Rehacer">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEditarProducto" mnemonicParsing="false" onAction="#editarProducto" prefHeight="35.0" prefWidth="100.0" text="Editar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEliminarProducto" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="35.0" prefWidth="100.0" text="Eliminar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnAgregarProducto" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="35.0" prefWidth="100.0" text="Agregar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="30.0" />
+         </padding>
+      </VBox>
+      
+   </children>
+   <padding>
+      <Insets left="15.0" top="10.0" />
+   </padding>
+</AnchorPane>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.PrincipalController">
+   <left>
+      <VBox fx:id="menuLateral" prefHeight="500.0" prefWidth="150.0" spacing="10.0" style="-fx-background-color: #37206A;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <children>
+            <Label fx:id="labelInicio" onMouseClicked="#mostrarInicio" prefHeight="43.0" prefWidth="178.0" text="Inicio" textFill="WHITE" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/house-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelReservas" layoutX="10.0" layoutY="30.0" onMouseClicked="#mostrarReservas" prefHeight="43.0" prefWidth="178.0" text="Reservas" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/telephone-plus-fill-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelHabitaciones" layoutX="10.0" layoutY="84.0" onMouseClicked="#mostrarHabitaciones" prefHeight="43.0" prefWidth="178.0" text="Habitaciones" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/bedroom-3-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelHuespedes" layoutX="10.0" layoutY="137.0" onMouseClicked="#mostrarHuespedes" prefHeight="43.0" prefWidth="178.0" text="Huespedes" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/guest-traveler-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelServicios" layoutX="10.0" layoutY="191.0" onMouseClicked="#mostrarservicios" prefHeight="43.0" prefWidth="178.0" text="Servicios" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/services-svgrepo-com%20(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelProductos" layoutX="10.0" layoutY="244.0" onMouseClicked="#mostrarProductos" prefHeight="43.0" prefWidth="178.0" text="Productos" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/services-svgrepo-com%20(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelCalendario" layoutX="10.0" layoutY="244.0" onMouseClicked="#mostrarCalendario" prefHeight="43.0" prefWidth="178.0" text="Calendario" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Imagenes/calendar-alt-svgrepo-com.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane fx:id="anchorPanePrincipal" prefHeight="476.0" prefWidth="719.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <Pane prefHeight="69.0" prefWidth="850.0" style="-fx-background-color: #37206A;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="61.0" fitWidth="74.0" layoutX="32.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/Logo%20hotel.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="574.0" layoutY="21.0" text="Usuario: " textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textUsuarioLogueado" layoutX="655.0" layoutY="22.0" />
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

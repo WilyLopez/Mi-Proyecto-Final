@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AnchorPaneHabitaciones" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.HabitacionesController">
+   <children>
+      <BorderPane layoutX="100.0" layoutY="106.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="704.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="38.0" prefWidth="326.0" text="Registro de habitaciones" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="704.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editarHabitacion" prefHeight="35.0" prefWidth="150.0" text="Editar" />
+                  <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarHabitacion" prefHeight="35.0" prefWidth="150.0" text="Eliminar" />
+                  <Button fx:id="btnInsertarHabitacion" mnemonicParsing="false" onAction="#insertarHabitacion" prefHeight="35.0" prefWidth="150.0" text="Ingresar">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox prefHeight="354.0" prefWidth="704.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="658.0">
+                     <children>
+                        <Label text="Tipo habitación: ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cBoxTipoHabitacion" onAction="#filtralPorTipoHabitacion" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tablaHabitaciones" prefHeight="362.0" prefWidth="639.0" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="ColumnNumero" editable="false" maxWidth="50.0" minWidth="35.20000571012497" prefWidth="39.99999350309372" resizable="false" text="N°" />
+                        <TableColumn fx:id="ColumnNumeroHabitacion" maxWidth="100.79997634887695" minWidth="76.79997253417969" prefWidth="76.79997253417969" resizable="false" text="Nombre" />
+                        <TableColumn fx:id="ColumnTipoHabitacion" maxWidth="123.20001220703125" minWidth="98.39996337890625" prefWidth="98.39996337890625" resizable="false" text="Tipo" />
+                        <TableColumn fx:id="ColumnPrecio" maxWidth="183.19998168945312" minWidth="56.799957275390625" prefWidth="77.60000610351562" resizable="false" text="Precio" />
+                        <TableColumn fx:id="ColumnDetalles" maxWidth="500.0" minWidth="236.79995727539062" prefWidth="364.0000061035156" resizable="false" sortable="false" text="Detalles" />
+                     </columns>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets left="15.0" right="30.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets left="15.0" top="20.0" />
+   </padding>
+</AnchorPane>
