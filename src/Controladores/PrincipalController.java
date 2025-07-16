@@ -51,8 +51,6 @@ public class PrincipalController implements Initializable {
     @FXML
     private Label labelLimpieza;
     private Usuario UsuarioLogueado;
-    @FXML
-    private Label labelGanancias;
 
     /**
      * Initializes the controller class.
@@ -118,10 +116,6 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-    private void mostrarganancias(MouseEvent event) {
-    }
-
-    @FXML
     private void cerrarSesion(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/IniciarSesion.fxml"));
@@ -151,6 +145,8 @@ public class PrincipalController implements Initializable {
                 serviciosController.setUsuario(UsuarioLogueado);
             } else if (controller instanceof ProductosController productosController) {
                 productosController.setUsuario(UsuarioLogueado);
+            } else if (controller instanceof ReservasController reservasController) {
+                reservasController.setUsuario(UsuarioLogueado); // ⬅️ ESTA LÍNEA FALTABA
             }
 
             anchorPanePrincipal.getChildren().clear();

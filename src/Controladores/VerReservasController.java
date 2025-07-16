@@ -1,5 +1,6 @@
 package Controladores;
 
+import CRUD.DetallesReservaDAO;
 import CRUD.ReservaDAO;
 import Estructuras.AVLReservas;
 import Modelo.Reserva;
@@ -13,6 +14,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -67,6 +70,8 @@ public class VerReservasController implements Initializable {
     private ReservaDAO reservaDAO;
     private ObservableList<Reserva> listaReservas = FXCollections.observableArrayList();
     private Usuario usuarioLogueado;
+    private  DetallesReservaDAO detalleReservaItemDAO;
+
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     @FXML
     private AnchorPane AnchorPaneVerReservas;
@@ -77,6 +82,7 @@ public class VerReservasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         reservaDAO = new ReservaDAO();
+        detalleReservaItemDAO = new DetallesReservaDAO();
         configurarColumnas();
         configurarComboBoxes();
         configurarBusqueda();
@@ -87,9 +93,8 @@ public class VerReservasController implements Initializable {
         this.usuarioLogueado = usuario;
     }
 
-
     @FXML
-    private void eliminarReserva(ActionEvent event) throws SQLException{
+    private void eliminarReserva(ActionEvent event) throws SQLException {
         if (usuarioLogueado == null || usuarioLogueado.getRol() != Enums.RolUsuario.ADMIN) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar reservas.");
             return;
@@ -102,6 +107,13 @@ public class VerReservasController implements Initializable {
         }
 
         if (!AlertaUtil.confirmar("¿Está seguro de eliminar la reserva?")) {
+            return;
+        }
+
+        boolean detallesEliminados = detalleReservaItemDAO.eliminarPorReserva(seleccionado.getIdReserva());
+
+        if (!detallesEliminados) {
+            AlertaUtil.mostrarError("No se pudieron eliminar los ítems asociados a la reserva.");
             return;
         }
 
@@ -146,7 +158,7 @@ public class VerReservasController implements Initializable {
         });
         ColumnDniHuesped.setCellValueFactory(new PropertyValueFactory<>("dniHuesped"));
         ColumnNumeroHabitacion.setCellValueFactory(new PropertyValueFactory<>("numeroHabitacion"));
-       
+
         ColumnFechaEntrada.setCellValueFactory(cellData -> {
             LocalDateTime fecha = cellData.getValue().getFechaHoraEntrada();
             return new javafx.beans.property.SimpleStringProperty(fecha.format(FORMATTER));

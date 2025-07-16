@@ -100,7 +100,7 @@
                <graphic>
                   <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true" styleClass="menu-icon">
                      <image>
-                        <Image url="@../Imagenes/services-svgrepo-com%20(2).png" />
+                        <Image url="@../Imagenes/product-item-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -115,7 +115,7 @@
                <graphic>
                   <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true" styleClass="menu-icon">
                      <image>
-                        <Image url="@../Imagenes/services-svgrepo-com%20(2).png" />
+                        <Image url="@../Imagenes/broom-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -138,21 +138,6 @@
                   <Insets left="15.0" />
                </padding>
             </Label>
-            <Label fx:id="labelGanancias" layoutX="10.0" layoutY="440.0" onMouseClicked="#mostrarganancias" prefHeight="43.0" prefWidth="178.0" styleClass="menu-item" text="Ganancias" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true" styleClass="menu-icon">
-                     <image>
-                        <Image url="@../Imagenes/calendar-alt-svgrepo-com.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-            </Label>
             <Label fx:id="labelCerrarSecion" layoutX="10.0" layoutY="352.0" onMouseClicked="#cerrarSesion" prefHeight="43.0" prefWidth="178.0" styleClass="menu-item" text="Cerrar Sesión" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -160,7 +145,7 @@
                <graphic>
                   <ImageView fitHeight="28.0" pickOnBounds="true" preserveRatio="true" styleClass="menu-icon">
                      <image>
-                        <Image url="@../Imagenes/calendar-alt-svgrepo-com.png" />
+                        <Image url="@../Imagenes/logout-svgrepo-com.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -179,9 +164,9 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="82.0" prefWidth="264.0" HBox.hgrow="ALWAYS">
                <children>
-                  <ImageView fitHeight="61.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
+                  <ImageView fitHeight="83.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" styleClass="logo">
                      <image>
-                        <Image url="@../Imagenes/Logo%20hotel.jpg" />
+                        <Image url="@../Imagenes/5%20Stars%20Hotel%20Logo%20-%20Hecho%20con%20PosterMyWall.png" />
                      </image>
                   </ImageView>
                   <Label styleClass="top-name-hotel" text="Ibiza Suite">
@@ -201,7 +186,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textUsuarioLogueado" editable="false" prefHeight="30.0" prefWidth="185.0" styleClass="top-text-field" />
+                  <TextField fx:id="textUsuarioLogueado" editable="false" prefHeight="30.0" prefWidth="185.0" styleClass="top-text-field-user" />
                   <TextField fx:id="textTipoUsuario" editable="false" styleClass="top-text-field">
                      <HBox.margin>
                         <Insets left="30.0" />
