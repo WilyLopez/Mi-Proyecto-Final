@@ -74,6 +74,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btnFiltrarPorHabitacion" mnemonicParsing="false" onAction="#filtrarPorHabitacion" prefHeight="35.0" prefWidth="120.0" text="Mostrar InOrden" />
                </children>
             </HBox>
          </children>

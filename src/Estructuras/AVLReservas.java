@@ -26,7 +26,6 @@ public class AVLReservas {
 
     private NodoReserva raiz;
 
-    
     private int altura(NodoReserva nodo) {
         return nodo == null ? 0 : nodo.altura;
     }
@@ -135,7 +134,6 @@ public class AVLReservas {
         buscarPorDNIRec(nodo.derecha, dni, resultado);
     }
 
-    // buscar por numero de habitacion
     public List<Reserva> buscarPorHabitacion(int numero) {
         List<Reserva> resultado = new ArrayList<>();
         buscarPorHabitacionRec(raiz, numero, resultado);
@@ -153,7 +151,6 @@ public class AVLReservas {
         buscarPorHabitacionRec(nodo.derecha, numero, resultado);
     }
 
-    // eliminar por fecha
     public void eliminarPorFecha(LocalDateTime fecha) {
         raiz = eliminarPorFechaRec(raiz, fecha);
     }
@@ -168,14 +165,14 @@ public class AVLReservas {
         } else if (fecha.isAfter(nodo.reserva.getFechaHoraEntrada())) {
             nodo.derecha = eliminarPorFechaRec(nodo.derecha, fecha);
         } else {
-            
+
             if (nodo.izquierda == null) {
                 return nodo.derecha;
             }
             if (nodo.derecha == null) {
                 return nodo.izquierda;
             }
-            
+
             NodoReserva sucesor = encontrarMin(nodo.derecha);
             nodo.reserva = sucesor.reserva;
             nodo.derecha = eliminarPorFechaRec(nodo.derecha, sucesor.reserva.getFechaHoraEntrada());
@@ -185,7 +182,6 @@ public class AVLReservas {
         return balancear(nodo);
     }
 
-    // eliminar pod dni huesped
     public void eliminarPorDni(String dni) {
         List<Reserva> reservas = buscarPorDNI(dni);
         for (Reserva r : reservas) {
@@ -201,7 +197,21 @@ public class AVLReservas {
         }
     }
 
-    // inorden por fecha de entrada
+    public List<Reserva> obtenerInOrdenPorNumeroHabitacion() {
+        List<Reserva> resultado = new ArrayList<>();
+        inordenRec(raiz, resultado); // Recorre normal por fecha
+        resultado.sort((r1, r2) -> Integer.compare(r1.getNumeroHabitacion(), r2.getNumeroHabitacion())); // Ordena por habitación
+        return resultado;
+    }
+
+    private void inordenRec(NodoReserva nodo, List<Reserva> lista) {
+        if (nodo != null) {
+            inordenRec(nodo.izquierda, lista);
+            lista.add(nodo.reserva);
+            inordenRec(nodo.derecha, lista);
+        }
+    }
+
     public void inorden() {
         System.out.println("Reservas en orden de entrada:");
         inordenRec(raiz);
@@ -244,4 +254,5 @@ public class AVLReservas {
 
         return nodo;
     }
+
 }

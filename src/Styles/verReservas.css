@@ -117,16 +117,17 @@
     -fx-background-color: #7400b8;
 }
 
-#btnEditar {
+#btnFiltrarPorHabitacion {
     -fx-background-color: #ffb703;
     -fx-text-fill: #1a1a1a;
     -fx-font-weight: bold;
     -fx-background-radius: 10;
     -fx-cursor: hand;
 }
-#btnEditar:hover {
+#btnFiltrarPorHabitacion:hover {
     -fx-background-color: #e9a100;
 }
+
 
 #btnEliminar {
     -fx-background-color: #ef233c;

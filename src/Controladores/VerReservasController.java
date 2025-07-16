@@ -11,33 +11,19 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author Lenovo
- */
 public class VerReservasController implements Initializable {
 
     @FXML
@@ -46,6 +32,8 @@ public class VerReservasController implements Initializable {
     private TextField textFormatoBusqueda;
     @FXML
     private ComboBox<String> cBoxOrdenarPor;
+    @FXML
+    private Button btnFiltrarPorHabitacion;
     @FXML
     private TableView<Reserva> tableReserva;
     @FXML
@@ -60,25 +48,21 @@ public class VerReservasController implements Initializable {
     private TableColumn<Reserva, String> ColumnFechaSalida;
     @FXML
     private TableColumn<Reserva, String> ColumnTotal;
-
     @FXML
     private Button btnEliminar;
     @FXML
     private Button btnNuevaReserva;
+    @FXML
+    private AnchorPane AnchorPaneVerReservas;
 
     private AVLReservas arbolReservas = new AVLReservas();
     private ReservaDAO reservaDAO;
     private ObservableList<Reserva> listaReservas = FXCollections.observableArrayList();
     private Usuario usuarioLogueado;
-    private  DetallesReservaDAO detalleReservaItemDAO;
+    private DetallesReservaDAO detalleReservaItemDAO;
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    @FXML
-    private AnchorPane AnchorPaneVerReservas;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         reservaDAO = new ReservaDAO();
@@ -93,64 +77,6 @@ public class VerReservasController implements Initializable {
         this.usuarioLogueado = usuario;
     }
 
-    @FXML
-    private void eliminarReserva(ActionEvent event) throws SQLException {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != Enums.RolUsuario.ADMIN) {
-            AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar reservas.");
-            return;
-        }
-
-        Reserva seleccionado = tableReserva.getSelectionModel().getSelectedItem();
-        if (seleccionado == null) {
-            AlertaUtil.mostrarAdvertencia("Seleccione una reserva para eliminar.");
-            return;
-        }
-
-        if (!AlertaUtil.confirmar("¿Está seguro de eliminar la reserva?")) {
-            return;
-        }
-
-        boolean detallesEliminados = detalleReservaItemDAO.eliminarPorReserva(seleccionado.getIdReserva());
-
-        if (!detallesEliminados) {
-            AlertaUtil.mostrarError("No se pudieron eliminar los ítems asociados a la reserva.");
-            return;
-        }
-
-        if (reservaDAO.eliminar(seleccionado.getIdReserva())) {
-            arbolReservas.eliminarPorFecha(seleccionado.getFechaHoraEntrada());
-            listaReservas.remove(seleccionado);
-            tableReserva.refresh();
-            AlertaUtil.mostrarInformacion("Reserva eliminada correctamente.");
-        } else {
-            AlertaUtil.mostrarError("No se pudo eliminar la reserva.");
-        }
-    }
-
-    @FXML
-    private void nuevaReserva(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Reservas.fxml"));
-            Parent vista = loader.load();
-
-            ReservasController controller = loader.getController();
-            controller.setUsuario(usuarioLogueado);
-
-            AnchorPaneVerReservas.getChildren().clear();
-            AnchorPaneVerReservas.getChildren().add(vista);
-
-            AnchorPane.setTopAnchor(vista, 0.0);
-            AnchorPane.setBottomAnchor(vista, 0.0);
-            AnchorPane.setLeftAnchor(vista, 0.0);
-            AnchorPane.setRightAnchor(vista, 0.0);
-
-        } catch (IOException e) {
-            AlertaUtil.mostrarError("No se pudo cargar la vista de todas las reservas.");
-            e.printStackTrace();
-        }
-
-    }
-
     private void configurarColumnas() {
         ColumnNumero.setCellValueFactory(cellData -> {
             int index = tableReserva.getItems().indexOf(cellData.getValue()) + 1;
@@ -158,23 +84,12 @@ public class VerReservasController implements Initializable {
         });
         ColumnDniHuesped.setCellValueFactory(new PropertyValueFactory<>("dniHuesped"));
         ColumnNumeroHabitacion.setCellValueFactory(new PropertyValueFactory<>("numeroHabitacion"));
-
-        ColumnFechaEntrada.setCellValueFactory(cellData -> {
-            LocalDateTime fecha = cellData.getValue().getFechaHoraEntrada();
-            return new javafx.beans.property.SimpleStringProperty(fecha.format(FORMATTER));
-        });
-        ColumnFechaSalida.setCellValueFactory(cellData -> {
-            LocalDateTime fecha = cellData.getValue().getFechaHoraSalida();
-            return new javafx.beans.property.SimpleStringProperty(fecha.format(FORMATTER));
-        });
+        ColumnFechaEntrada.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().getFechaHoraEntrada().format(FORMATTER)));
+        ColumnFechaSalida.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().getFechaHoraSalida().format(FORMATTER)));
         ColumnTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         tableReserva.setItems(listaReservas);
-    }
-
-    private void configurarBusqueda() {
-        textFormatoBusqueda.textProperty().addListener((obs, oldVal, newVal) -> actualizarTabla());
-        cBoxFormatoBusqueda.setOnAction(e -> actualizarTabla());
-        cBoxOrdenarPor.setOnAction(e -> actualizarTabla());
     }
 
     private void configurarComboBoxes() {
@@ -184,13 +99,21 @@ public class VerReservasController implements Initializable {
         cBoxOrdenarPor.getSelectionModel().selectFirst();
     }
 
+    private void configurarBusqueda() {
+        textFormatoBusqueda.textProperty().addListener((obs, oldVal, newVal) -> actualizarTabla());
+        cBoxFormatoBusqueda.setOnAction(e -> actualizarTabla());
+        cBoxOrdenarPor.setOnAction(e -> actualizarTabla());
+    }
+
     private void cargarReservasDesdeBD() {
         listaReservas.clear();
         arbolReservas = new AVLReservas();
+
         for (Reserva r : reservaDAO.listarReservas()) {
             arbolReservas.insertar(r);
             listaReservas.add(r);
         }
+
         tableReserva.setItems(listaReservas);
         tableReserva.refresh();
     }
@@ -219,9 +142,9 @@ public class VerReservasController implements Initializable {
                 case "Fecha" -> {
                     try {
                         LocalDateTime fecha = Reserva.parseFechaHora(valorBusqueda);
-                        Reserva reserva = arbolReservas.buscarPorFecha(fecha);
-                        yield reserva != null ? List.of(reserva) : List.of();
-                    } catch (IllegalArgumentException e) {
+                        Reserva r = arbolReservas.buscarPorFecha(fecha);
+                        yield r != null ? List.of(r) : List.of();
+                    } catch (Exception e) {
                         AlertaUtil.mostrarAdvertencia("Formato de fecha inválido. Use yyyy-MM-dd HH:mm");
                         yield listaReservas;
                     }
@@ -239,6 +162,7 @@ public class VerReservasController implements Initializable {
             default ->
                 Comparator.comparing(Reserva::getFechaHoraEntrada);
         };
+
         reservasFiltradas = reservasFiltradas.stream()
                 .sorted(comparador)
                 .collect(Collectors.toList());
@@ -247,4 +171,65 @@ public class VerReservasController implements Initializable {
         tableReserva.refresh();
     }
 
+    @FXML
+    private void eliminarReserva(ActionEvent event) throws SQLException {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != Enums.RolUsuario.ADMIN) {
+            AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar reservas.");
+            return;
+        }
+
+        Reserva seleccionado = tableReserva.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            AlertaUtil.mostrarAdvertencia("Seleccione una reserva para eliminar.");
+            return;
+        }
+
+        if (!AlertaUtil.confirmar("¿Está seguro de eliminar la reserva?")) {
+            return;
+        }
+
+        if (!detalleReservaItemDAO.eliminarPorReserva(seleccionado.getIdReserva())) {
+            AlertaUtil.mostrarError("No se pudieron eliminar los ítems asociados a la reserva.");
+            return;
+        }
+
+        if (reservaDAO.eliminar(seleccionado.getIdReserva())) {
+            arbolReservas.eliminarPorFecha(seleccionado.getFechaHoraEntrada());
+            listaReservas.remove(seleccionado);
+            tableReserva.refresh();
+            AlertaUtil.mostrarInformacion("Reserva eliminada correctamente.");
+        } else {
+            AlertaUtil.mostrarError("No se pudo eliminar la reserva.");
+        }
+    }
+
+    @FXML
+    private void nuevaReserva(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Reservas.fxml"));
+            Parent vista = loader.load();
+
+            ReservasController controller = loader.getController();
+            controller.setUsuario(usuarioLogueado);
+
+            AnchorPaneVerReservas.getChildren().setAll(vista);
+            AnchorPane.setTopAnchor(vista, 0.0);
+            AnchorPane.setBottomAnchor(vista, 0.0);
+            AnchorPane.setLeftAnchor(vista, 0.0);
+            AnchorPane.setRightAnchor(vista, 0.0);
+
+        } catch (IOException e) {
+            AlertaUtil.mostrarError("No se pudo cargar la vista de reservas.");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void filtrarPorHabitacion(ActionEvent event) {
+        List<Reserva> ordenadas = arbolReservas.obtenerInOrdenPorNumeroHabitacion();
+        tableReserva.setItems(FXCollections.observableArrayList(ordenadas));
+        tableReserva.refresh();
+        
+        cBoxOrdenarPor.getSelectionModel().clearSelection();
+    }
 }
