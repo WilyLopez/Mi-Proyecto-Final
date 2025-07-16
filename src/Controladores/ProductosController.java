@@ -199,7 +199,7 @@ public class ProductosController implements Initializable, ReservasController.Se
 
     @FXML
     private void editarProducto(ActionEvent event) {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden editar productos.");
             return;
         }
@@ -223,7 +223,7 @@ public class ProductosController implements Initializable, ReservasController.Se
 
     @FXML
     private void eliminarProducto(ActionEvent event) {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar productos.");
             return;
         }
@@ -258,7 +258,7 @@ public class ProductosController implements Initializable, ReservasController.Se
 
     @FXML
     private void agregarProducto(ActionEvent event) {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden insertar productos.");
             return;
         }

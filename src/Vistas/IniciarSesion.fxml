@@ -36,7 +36,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="textNombre" prefHeight="30.0" VBox.vgrow="ALWAYS">
+                  <TextField fx:id="textNombre" prefHeight="30.0" styleClass="login-input" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
@@ -52,7 +52,7 @@
                      </VBox.margin>
                      <children>
                         <TextField fx:id="textContraseñaVisible" prefHeight="30.0" visible="false" />
-                        <PasswordField fx:id="PasswContraseña" prefHeight="30.0" />
+                        <PasswordField fx:id="PasswContraseña" prefHeight="30.0" styleClass="login-input" />
                      </children>
                   </StackPane>
                   <CheckBox fx:id="CBoxMostrarContraseña" mnemonicParsing="false" onAction="#mostrarContraseña" styleClass="login-checkbox" text="Mostrar contraseña" VBox.vgrow="ALWAYS" />
@@ -71,11 +71,11 @@
             <Insets bottom="40.0" left="35.0" right="35.0" top="40.0" />
          </padding>
       </VBox>
-      <VBox alignment="CENTER" prefHeight="402.0" prefWidth="300.0" styleClass="login-image-panel" stylesheets="@../Styles/iniciarsesion.css" HBox.hgrow="ALWAYS">
+      <VBox alignment="CENTER" prefHeight="402.0" prefWidth="300.0" style="-fx-background-color: #;" styleClass="login-image-panel" stylesheets="@../Styles/iniciarsesion.css" HBox.hgrow="ALWAYS">
          <children>
             <ImageView fitHeight="300.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Imagenes/Logo%20hotel.jpg" />
+                  <Image url="@../Imagenes/5%20Stars%20Hotel%20Logo%20-%20Hecho%20con%20PosterMyWall.png" />
                </image>
             </ImageView>
          </children>

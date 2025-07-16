@@ -120,7 +120,7 @@ public class ServiciosController implements Initializable, ReservasController.Se
 
     @FXML
     private void editarServicio(ActionEvent event) {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden editar servicios.");
             return;
         }
@@ -136,7 +136,7 @@ public class ServiciosController implements Initializable, ReservasController.Se
 
     @FXML
     private void eliminarServicio(ActionEvent event) {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar servicios.");
             return;
         }
@@ -165,7 +165,7 @@ public class ServiciosController implements Initializable, ReservasController.Se
 
     @FXML
     private void agregarServicio(ActionEvent event) {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden agregar servicios.");
             return;
         }

@@ -91,7 +91,7 @@
                   </VBox>
                   <VBox prefHeight="183.0" prefWidth="222.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <LineChart fx:id="LineChart" styleClass="line-chart" title="Resemun de reservas semanal" VBox.vgrow="ALWAYS">
+                        <LineChart fx:id="LineChart" styleClass="line-chart" title="Resumen de reservas semanal" VBox.vgrow="ALWAYS">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" styleClass="axis-label" tickLabelFill="WHITE" />
                           </xAxis>

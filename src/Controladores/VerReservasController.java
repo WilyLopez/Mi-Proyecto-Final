@@ -173,7 +173,7 @@ public class VerReservasController implements Initializable {
 
     @FXML
     private void eliminarReserva(ActionEvent event) throws SQLException {
-        if (usuarioLogueado == null || usuarioLogueado.getRol() != Enums.RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != Enums.RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar reservas.");
             return;
         }

@@ -313,17 +313,17 @@ public class ReservasController implements Initializable {
             LocalDate entrada = DatePickerFechaEntrada.getValue();
             LocalDate salida = DatePickerFechaSalida.getValue();
             long dias = java.time.temporal.ChronoUnit.DAYS.between(entrada, salida);
-            dias = Math.max(1, dias); // Asegura al menos 1 día
+            dias = Math.max(1, dias); // Al menos un día de hospedaje
 
-            double precioHabitacion;
-            try {
-                precioHabitacion = Double.parseDouble(sanitizarEntrada(textPrecioHabitacion.getText().trim()));
-            } catch (NumberFormatException e) {
-                AlertaUtil.mostrarAdvertencia("El precio de la habitación debe ser un valor numérico válido.");
+            String precioTexto = sanitizarDecimal(textPrecioHabitacion.getText().trim());
+            if (precioTexto.isEmpty() || !precioTexto.matches("\\d+(\\.\\d{1,2})?")) {
+                AlertaUtil.mostrarAdvertencia("El precio de la habitación debe tener un formato válido (ej. 125.00).");
                 return;
             }
 
+            double precioHabitacion = Double.parseDouble(precioTexto);
             double total = precioHabitacion * dias;
+
             for (DetalleReserva detalle : detallesReserva) {
                 total += detalle.calcularSubtotal();
             }
@@ -435,7 +435,14 @@ public class ReservasController implements Initializable {
         if (entrada == null) {
             return "";
         }
-        return entrada.replaceAll("[^a-zA-Z0-9@._-]", "");
+        return entrada.replaceAll("[^a-zA-Z0-9@._\\-]", "");
+    }
+
+    private String sanitizarDecimal(String entrada) {
+        if (entrada == null) {
+            return "";
+        }
+       return entrada.replaceAll("[^0-9.]", "");
     }
 
     private boolean validarFechas() {

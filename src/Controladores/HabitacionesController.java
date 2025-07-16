@@ -79,7 +79,7 @@ public class HabitacionesController implements Initializable {
 
     @FXML
     private void eliminarHabitacion(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden Eliminar habitaciones.");
             return;
         }
@@ -106,7 +106,7 @@ public class HabitacionesController implements Initializable {
 
     @FXML
     private void editarHabitacion(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden editar habitaciones.");
             return;
         }
@@ -121,7 +121,7 @@ public class HabitacionesController implements Initializable {
 
     @FXML
     private void insertarHabitacion(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden insertar habitaciones.");
             return;
         }

@@ -86,7 +86,7 @@ public class HuespedesController implements Initializable {
 
     @FXML
     private void eliminarHuesped(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado.getRol() != RolUsuario.ADMINISTRADOR) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar huéspedes.");
             return;
         }
