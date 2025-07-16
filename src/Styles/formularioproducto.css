@@ -1,55 +1,110 @@
-.formulario-contenedor {
-    -fx-background-color: linear-gradient(to bottom right, #f3e8ff, #e0ccff);
-}
-
-.formulario-vbox {
-    -fx-spacing: 10;
+.product-form-container {
+    -fx-background-color: #1e1e2f;
+    -fx-font-family: "Segoe UI", sans-serif;
     -fx-padding: 20;
 }
 
-.formularioTitulo-label {
-    -fx-font-size: 26px;
+.product-form-vbox {
+    -fx-spacing: 10;
+}
+
+.product-form-title {
+    -fx-text-fill: #ffeb81;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #6a0dad;
 }
 
-.formulario-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #4a4a4a;
+.product-field-label {
+    -fx-text-fill: #f0f0f0;
+    -fx-font-size: 13px;
 }
 
-.campo-input {
-    -fx-background-color: white;
-    -fx-border-color: #c084fc;
-    -fx-border-width: 1.5;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 6;
-    -fx-font-size: 14px;
-    -fx-text-fill: #3a3a3a;
-}
-
-.campo-area {
-    -fx-background-color: white;
-    -fx-border-color: #c084fc;
-    -fx-border-width: 1.5;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 8;
-    -fx-font-size: 14px;
-    -fx-text-fill: #3a3a3a;
-}
-
-.boton-guardar {
-    -fx-background-color: linear-gradient(to right, #a855f7, #7e22ce);
+.product-text-field, .product-price-field {
+    -fx-background-color: #2c2c3e;
+    -fx-border-color: #4a4a6a;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
     -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 12;
-    -fx-padding: 10 20;
-    -fx-font-size: 14px;
-    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #aaaaaa;
 }
 
-.boton-guardar:hover {
-    -fx-background-color: linear-gradient(to right, #9333ea, #6b21a8);
+.product-text-field:focused,
+.product-price-field:focused {
+    -fx-border-color: #6c63ff;
+    -fx-background-color: #33334d;
+}
+
+
+.text-area {
+    -fx-background-color: #2c2c3e;
+    -fx-border-color: #4a4a6a;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-padding: 6;
+}
+
+.text-area:focused {
+      -fx-border-color: #ffeb81;
+    -fx-background-color: #2e2e42;
+    
+}
+
+/* Scroll general del TextArea */
+.text-area .scroll-pane {
+    -fx-background: #2c2c3e;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+/* Barra de desplazamiento vertical */
+.text-area .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.text-area .scroll-bar:vertical .thumb {
+    -fx-background-color: #555;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+}
+
+.text-area .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #888;
+}
+
+/* Opcional: barra horizontal si se activa */
+.text-area .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.text-area .scroll-bar:horizontal .thumb {
+    -fx-background-color: #555;
+    -fx-background-insets: 2;
+    -fx-background-radius: 5;
+}
+
+.text-area .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: #888;
+}
+
+.product-button-container {
+    -fx-padding: 10 0 0 0;
+}
+
+.product-save-button {
+    -fx-background-color: #3949ab;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0.3, 0, 1);
+}
+
+.product-save-button:hover {
+    -fx-background-color: #303f9f;
 }

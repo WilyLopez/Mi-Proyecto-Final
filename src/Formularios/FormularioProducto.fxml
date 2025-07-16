@@ -11,23 +11,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="350.0" styleClass="formulario-contenedor" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Controladores.FormularioProductoController">
+<AnchorPane id="AnchorPane" prefHeight="380.0" prefWidth="290.0" styleClass="product-form-container" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FormularioProductoController">
     <stylesheets>
         <URL value="@/Styles/formularioproducto.css" />
     </stylesheets>
    <children>
-      <VBox layoutX="24.0" layoutY="40.0" prefHeight="400.0" prefWidth="350.0" styleClass="formulario-vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="24.0" layoutY="40.0" prefHeight="380.0" prefWidth="290.0" styleClass="product-form-container" stylesheets="@../Styles/formularioproducto.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="350.0" styleClass="product-header-box">
                <children>
-                  <Label styleClass="formularioTitulo-label" text="Productos">
+                  <Label styleClass="product-form-title" text="Productos">
                      <font>
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Label prefWidth="150.0" styleClass="formulario-label" text="Nombre:">
+            <Label prefWidth="150.0" styleClass="product-field-label" text="Nombre:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -35,8 +35,8 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="txtNombreProducto" prefHeight="30.0" styleClass="campo-input" />
-            <Label prefWidth="150.0" styleClass="formulario-label" text="Tipo:">
+            <TextField fx:id="txtNombreProducto" prefHeight="30.0" styleClass="product-text-field" />
+            <Label prefWidth="150.0" styleClass="product-field-label" text="Tipo:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -44,8 +44,8 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="txtTipoProducto" prefHeight="30.0" styleClass="campo-input" />
-            <Label prefWidth="150.0" styleClass="formulario-label" text="Descripción:">
+            <TextField fx:id="txtTipoProducto" prefHeight="30.0" styleClass="product-text-field" />
+            <Label prefWidth="150.0" styleClass="product-field-label" text="Descripción:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -53,19 +53,20 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="textDescripcion" prefHeight="60.0" prefWidth="290.0" styleClass="campo-area" />
-            <Label prefWidth="150.0" styleClass="formulario-label" text="Precio:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="txtPrecio" prefHeight="30.0" styleClass="campo-input" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <TextArea fx:id="textDescripcion" prefHeight="60.0" prefWidth="290.0" styleClass="product-text-area" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#btnGuardar" prefHeight="35.0" prefWidth="130.0" styleClass="boton-guardar" text="Guardar">
+                  <Label prefHeight="28.0" prefWidth="61.0" styleClass="product-field-label" text="Precio:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtPrecio" prefHeight="30.0" styleClass="product-price-field" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="product-button-container">
+               <children>
+                  <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#btnGuardar" prefHeight="35.0" prefWidth="130.0" styleClass="product-save-button" text="Guardar">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -75,7 +76,4 @@
          </children>
       </VBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
-   </padding>
 </AnchorPane>

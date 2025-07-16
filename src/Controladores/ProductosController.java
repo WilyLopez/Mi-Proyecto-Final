@@ -1,5 +1,6 @@
 package Controladores;
 
+import Util.AlertaUtil;
 import CRUD.ProductoDAO;
 import Enums.RolUsuario;
 import Enums.TipoAccionUsuario;
@@ -8,13 +9,13 @@ import Estructuras.PilaAccionesProducto;
 import Modelo.AccionUsuario;
 import Modelo.Producto;
 import Modelo.Usuario;
+import Util.SeleccionProducto;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,11 +37,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class for managing products in the hotel management system.
+ * Allows adding, editing, deleting, and selecting products for reservations.
  *
- * @author Lenovo
+ * @author Wilian Lopez
  */
-public class ProductosController implements Initializable {
+public class ProductosController implements Initializable, ReservasController.Seleccionable<Producto> {
 
     @FXML
     private ComboBox<String> CBoxOrdenar;
@@ -67,17 +70,17 @@ public class ProductosController implements Initializable {
     private Button btnEliminarProducto;
     @FXML
     private Button btnAgregarProducto;
+    @FXML
+    private Button btnAgregarAReserva;
 
     private ArregloProductos arregloProductos = new ArregloProductos();
     private PilaAccionesProducto pilaDeshacer = new PilaAccionesProducto();
     private PilaAccionesProducto pilaRehacer = new PilaAccionesProducto();
-
     private ObservableList<Producto> listaObservable = FXCollections.observableArrayList();
+    
     private Usuario usuarioLogueado;
+    private boolean modoSeleccionMultiple = false;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configurarTabla();
@@ -85,14 +88,52 @@ public class ProductosController implements Initializable {
         try {
             cargarDatosDesdeBD();
         } catch (SQLException ex) {
-            Logger.getLogger(ProductosController.class.getName()).log(Level.SEVERE, null, ex);
+            AlertaUtil.mostrarError("Error al cargar productos: " + ex.getMessage());
+            ex.printStackTrace();
         }
         configurarEventos();
+        configurarModoSeleccion();
     }
 
+
+    @Override
     public void setUsuario(Usuario usuario) {
         this.usuarioLogueado = usuario;
     }
+
+
+    @Override
+    public void setModoSeleccionMultiple(boolean modo) {
+        this.modoSeleccionMultiple = modo;
+        configurarModoSeleccion();
+    }
+
+    @Override
+    public void configurarModoSeleccion() {
+        if (modoSeleccionMultiple) {
+            btnAgregarAReserva.setVisible(true);
+            btnAgregarProducto.setVisible(false);
+            btnDeshacer.setVisible(false);
+            btnEditarProducto.setVisible(false);
+            btnEliminarProducto.setVisible(false);
+            btnRehacer.setVisible(false);
+            tableProducto.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        } else {
+            btnAgregarAReserva.setVisible(false);
+            btnAgregarProducto.setVisible(true);
+            btnDeshacer.setVisible(true);
+            btnEditarProducto.setVisible(true);
+            btnEliminarProducto.setVisible(true);
+            btnRehacer.setVisible(true);
+            tableProducto.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        }
+    }
+
+    @Override
+    public List<Producto> getSeleccionados() {
+        return new ArrayList<>(tableProducto.getSelectionModel().getSelectedItems());
+    }
+
 
     @FXML
     private void deshacerAccion(ActionEvent event) {
@@ -123,7 +164,6 @@ public class ProductosController implements Initializable {
             }
         }
         tableProducto.refresh();
-
     }
 
     @FXML
@@ -155,12 +195,11 @@ public class ProductosController implements Initializable {
             }
         }
         tableProducto.refresh();
-
     }
 
     @FXML
     private void editarProducto(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden editar productos.");
             return;
         }
@@ -181,10 +220,11 @@ public class ProductosController implements Initializable {
         ), true);
     }
 
+
     @FXML
     private void eliminarProducto(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
-            AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar habitaciones.");
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+            AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar productos.");
             return;
         }
 
@@ -212,18 +252,31 @@ public class ProductosController implements Initializable {
             }
         } catch (SQLException e) {
             AlertaUtil.mostrarError("Error al eliminar producto: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @FXML
     private void agregarProducto(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden insertar productos.");
             return;
         }
 
         abrirFormulario(null, false);
     }
+
+    @FXML
+    private void agregarProductoAReserva(ActionEvent event) {
+        List<Producto> seleccionados = new ArrayList<>(tableProducto.getSelectionModel().getSelectedItems());
+        if (!seleccionados.isEmpty()) {
+            SeleccionProducto.setProductosSeleccionados(seleccionados);
+            cerrarVentana();
+        } else {
+            AlertaUtil.mostrarAdvertencia("Debe seleccionar al menos un producto.");
+        }
+    }
+
 
     private void configurarTabla() {
         ColumnNumero.setCellValueFactory(cellData -> {
@@ -234,10 +287,10 @@ public class ProductosController implements Initializable {
         ColumnTipoProducto.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         ColumnDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         ColumnPrecioProducto.setCellValueFactory(new PropertyValueFactory<>("precio"));
-
         tableProducto.setItems(listaObservable);
     }
 
+  
     private void cargarComboOrdenar() {
         CBoxOrdenar.getItems().addAll("Por ID", "Por Nombre", "Por Precio");
         CBoxOrdenar.getSelectionModel().selectFirst();
@@ -261,6 +314,7 @@ public class ProductosController implements Initializable {
             tableProducto.refresh();
         } catch (SQLException e) {
             AlertaUtil.mostrarError("Error al cargar productos: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -273,10 +327,10 @@ public class ProductosController implements Initializable {
         List<Producto> filtrados = listaObservable.stream()
                 .filter(p -> p.getNombre().toLowerCase().contains(filtroLower))
                 .collect(Collectors.toList());
-
         tableProducto.setItems(FXCollections.observableArrayList(filtrados));
     }
 
+  
     private void ordenarLista(String criterio) {
         Comparator<Producto> comparador = switch (criterio) {
             case "Por Nombre" ->
@@ -294,7 +348,6 @@ public class ProductosController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Formularios/FormularioProducto.fxml"));
             Parent root = loader.load();
-
             FormularioProductoController controlador = loader.getController();
             controlador.inicializarFormulario(producto, esEdicion);
 
@@ -321,13 +374,7 @@ public class ProductosController implements Initializable {
                     }
                 } else {
                     List<Producto> listaBD = dao.listar();
-
-                    actualizado = listaBD.stream()
-                            .filter(p -> p.getNombre().equalsIgnoreCase(controlador.getNombre())
-                            && p.getTipo().equalsIgnoreCase(producto.getTipo()))
-                            .reduce((first, second) -> second)
-                            .orElse(null);
-
+                    actualizado = listaBD.get(listaBD.size() - 1); // Get the last inserted product
                     if (actualizado != null) {
                         arregloProductos.insertar(actualizado);
                         listaObservable.add(actualizado);
@@ -339,11 +386,15 @@ public class ProductosController implements Initializable {
                     }
                 }
             }
-
         } catch (Exception e) {
             AlertaUtil.mostrarError("No se pudo abrir el formulario: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+ 
+    private void cerrarVentana() {
+        Stage stage = (Stage) tableProducto.getScene().getWindow();
+        stage.close();
+    }
 }

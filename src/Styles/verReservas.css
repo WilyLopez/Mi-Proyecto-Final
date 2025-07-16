@@ -1,0 +1,151 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #1e1e2f;
+}
+.content-principal{
+    -fx-background-color: #1e1e2f;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.label-titulo {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffeb81;
+}
+
+
+.combo-box {
+    -fx-background-color: #2c2c3e;
+    -fx-border-color: #444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 4px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #2c2c3e;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #2c2c3e;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #3a3a4f;
+}
+
+
+
+
+#tableReserva {
+    -fx-background-color: #1e1e2f;
+    -fx-border-color: #3f3f5a;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+#tableReserva .table-row-cell {
+    -fx-background-color: #26263c;
+}
+#tableReserva .table-row-cell:odd {
+    -fx-background-color: #2e2e4a;
+}
+#tableReserva .table-row-cell:selected {
+    -fx-background-color: #8457b9;
+    -fx-text-fill: #0d0c0e;
+}
+
+#tableReserva .table-cell {
+    -fx-text-fill: white;
+    -fx-padding: 6px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+#tableReserva .column-header-background {
+    -fx-background-color: #555170;
+    -fx-border-color: transparent;
+    -fx-background-radius: 6 6 0 0;
+}
+#tableReserva .column-header {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+}
+
+
+#btnVerCalendario {
+    -fx-background-color: #5e60ce;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.2, 0, 1);
+}
+#btnVerCalendario:hover {
+    -fx-background-color: #4ea8de;
+}
+
+
+#btnVerHistorial {
+    -fx-background-color: #6930c3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnVerHistorial:hover {
+    -fx-background-color: #7400b8;
+}
+
+#btnEditar {
+    -fx-background-color: #ffb703;
+    -fx-text-fill: #1a1a1a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+#btnEditar:hover {
+    -fx-background-color: #e9a100;
+}
+
+#btnEliminar {
+    -fx-background-color: #ef233c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+}
+#btnEliminar:hover {
+    -fx-background-color: #d90429;
+}
+
+#btnNuevaReserva {
+    -fx-background-color: #06d6a0;
+    -fx-text-fill: #1a182b;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnNuevaReserva:hover {
+    -fx-background-color: #00b386;
+}

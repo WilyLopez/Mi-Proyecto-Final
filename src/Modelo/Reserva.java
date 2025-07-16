@@ -3,6 +3,7 @@ package Modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -15,25 +16,27 @@ public class Reserva {
     private int numeroHabitacion;
     private LocalDateTime fechaHoraEntrada;
     private LocalDateTime fechaHoraSalida;
+    private double total;
 
+    private boolean validarFechas = true;
     private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    // Constructor para entrada de datos como texto
-    public Reserva(int idReserva, String dniHuesped, int numeroHabitacion, String fechaHoraEntrada, String fechaHoraSalida) {
-        setIdReserva(idReserva);
+    public Reserva(String dniHuesped, int numeroHabitacion, String fechaHoraEntrada, String fechaHoraSalida, double total) {
         setDniHuesped(dniHuesped);
         setNumeroHabitacion(numeroHabitacion);
         setFechaHoraEntrada(parseFechaHora(fechaHoraEntrada));
         setFechaHoraSalida(parseFechaHora(fechaHoraSalida));
+        setTotal(total);
     }
 
-    // Constructor para uso con base de datos (usa LocalDateTime directamente)
-    public Reserva(int idReserva, String dniHuesped, int numeroHabitacion, LocalDateTime fechaHoraEntrada, LocalDateTime fechaHoraSalida) {
-        setIdReserva(idReserva);
+    public Reserva(String dniHuesped, int numeroHabitacion, LocalDateTime fechaHoraEntrada, LocalDateTime fechaHoraSalida, double total) {
+        this.validarFechas = false;
         setDniHuesped(dniHuesped);
         setNumeroHabitacion(numeroHabitacion);
         setFechaHoraEntrada(fechaHoraEntrada);
         setFechaHoraSalida(fechaHoraSalida);
+        setTotal(total);
+        this.validarFechas = true;
     }
 
     public int getIdReserva() {
@@ -74,10 +77,18 @@ public class Reserva {
     }
 
     public void setFechaHoraEntrada(LocalDateTime fechaHoraEntrada) {
-        if (fechaHoraEntrada == null || fechaHoraEntrada.isBefore(LocalDateTime.now())) {
+        if (fechaHoraEntrada == null) {
+            throw new IllegalArgumentException("La fecha de entrada no puede ser nula.");
+        }
+
+        LocalDateTime entradaSinSegundos = fechaHoraEntrada.truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime ahoraSinSegundos = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+
+        if (validarFechas && entradaSinSegundos.isBefore(ahoraSinSegundos)) {
             throw new IllegalArgumentException("La fecha y hora de entrada debe ser actual o futura.");
         }
-        this.fechaHoraEntrada = fechaHoraEntrada;
+
+        this.fechaHoraEntrada = entradaSinSegundos;
     }
 
     public LocalDateTime getFechaHoraSalida() {
@@ -85,14 +96,32 @@ public class Reserva {
     }
 
     public void setFechaHoraSalida(LocalDateTime fechaHoraSalida) {
-        if (fechaHoraSalida == null || !fechaHoraSalida.isAfter(this.fechaHoraEntrada)) {
+        if (fechaHoraSalida == null) {
+            throw new IllegalArgumentException("La fecha de salida no puede ser nula.");
+        }
+
+        LocalDateTime salidaSinSegundos = fechaHoraSalida.truncatedTo(ChronoUnit.MINUTES);
+
+        if (this.fechaHoraEntrada != null && salidaSinSegundos.isBefore(this.fechaHoraEntrada)) {
             throw new IllegalArgumentException("La fecha de salida debe ser posterior a la de entrada.");
         }
-        this.fechaHoraSalida = fechaHoraSalida;
+
+        this.fechaHoraSalida = salidaSinSegundos;
     }
 
     public static DateTimeFormatter getFORMATO() {
         return FORMATO;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        if (total <= 0) {
+            throw new IllegalArgumentException("Total invalido");
+        }
+        this.total = total;
     }
 
     public static LocalDateTime parseFechaHora(String fechaHoraStr) {

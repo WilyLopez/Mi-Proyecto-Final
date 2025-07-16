@@ -1,18 +1,18 @@
 package Controladores;
 
+import Util.AlertaUtil;
 import CRUD.ServicioDAO;
 import Enums.RolUsuario;
 import Estructuras.ListaServicios;
-import Modelo.Habitacion;
 import Modelo.Servicio;
 import Modelo.Usuario;
+import Util.SeleccionServicio;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,11 +33,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
  * @author Lenovo
  */
-public class ServiciosController implements Initializable {
+public class ServiciosController implements Initializable, ReservasController.Seleccionable<Servicio> {
 
     @FXML
     private Button btnEditarServicio;
@@ -58,14 +57,15 @@ public class ServiciosController implements Initializable {
     private TableColumn<Servicio, Double> ColumnPrecio;
     @FXML
     private ComboBox<String> cboxOrdenarPor;
+    @FXML
+    private Button btnAgregarAReserva;
 
     private Usuario usuarioLogueado;
     private ObservableList<Servicio> listaObservable;
     private ListaServicios listaServicios;
+    private boolean modoSeleccionMultiple = false;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listaServicios = new ListaServicios();
@@ -76,18 +76,51 @@ public class ServiciosController implements Initializable {
         try {
             cargarServiciosDesdeBD();
         } catch (SQLException ex) {
-            Logger.getLogger(ServiciosController.class.getName()).log(Level.SEVERE, null, ex);
+            AlertaUtil.mostrarError("Error al cargar servicios: " + ex.getMessage());
+            ex.printStackTrace();
         }
-
+        configurarModoSeleccion();
     }
 
+
+    @Override
     public void setUsuario(Usuario usuario) {
         this.usuarioLogueado = usuario;
     }
 
+    @Override
+    public void setModoSeleccionMultiple(boolean modo) {
+        this.modoSeleccionMultiple = modo;
+        configurarModoSeleccion();
+    }
+
+    @Override
+    public void configurarModoSeleccion() {
+        if (modoSeleccionMultiple) {
+            btnAgregarAReserva.setVisible(true);
+            btnAgregarServicio.setVisible(false);
+            btnEditarServicio.setVisible(false);
+            btnEliminarServicio.setVisible(false);
+            tableServicio.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        } else {
+            btnAgregarAReserva.setVisible(false);
+            btnAgregarServicio.setVisible(true);
+            btnEditarServicio.setVisible(true);
+            btnEliminarServicio.setVisible(true);
+            tableServicio.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        }
+    }
+
+
+    @Override
+    public List<Servicio> getSeleccionados() {
+        return new ArrayList<>(tableServicio.getSelectionModel().getSelectedItems());
+    }
+
+
     @FXML
     private void editarServicio(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden editar servicios.");
             return;
         }
@@ -103,7 +136,7 @@ public class ServiciosController implements Initializable {
 
     @FXML
     private void eliminarServicio(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden eliminar servicios.");
             return;
         }
@@ -125,17 +158,31 @@ public class ServiciosController implements Initializable {
             }
         } catch (SQLException e) {
             AlertaUtil.mostrarError("Error al eliminar servicio: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
+
     @FXML
     private void agregarServicio(ActionEvent event) {
-        if (usuarioLogueado.getRol() != RolUsuario.ADMIN) {
+        if (usuarioLogueado == null || usuarioLogueado.getRol() != RolUsuario.ADMIN) {
             AlertaUtil.mostrarAdvertencia("Solo los administradores pueden agregar servicios.");
             return;
         }
 
         abrirFormulario(null, false);
+    }
+
+
+    @FXML
+    private void agregarServicioAReserva(ActionEvent event) {
+        List<Servicio> seleccionados = new ArrayList<>(tableServicio.getSelectionModel().getSelectedItems());
+        if (!seleccionados.isEmpty()) {
+            SeleccionServicio.setServiciosSeleccionados(seleccionados);
+            cerrarVentana();
+        } else {
+            AlertaUtil.mostrarAdvertencia("Debe seleccionar al menos un servicio.");
+        }
     }
 
     private void configurarTabla() {
@@ -184,6 +231,7 @@ public class ServiciosController implements Initializable {
                 .toList());
     }
 
+
     private void abrirFormulario(Servicio servicio, boolean esEdicion) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Formularios/FormularioServicio.fxml"));
@@ -195,6 +243,7 @@ public class ServiciosController implements Initializable {
             stage.setTitle(esEdicion ? "Editar Servicio" : "Agregar Servicio");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(tableServicio.getScene().getWindow());
             stage.showAndWait();
 
             if (controller.isGuardado()) {
@@ -221,10 +270,14 @@ public class ServiciosController implements Initializable {
                 tableServicio.setItems(listaObservable);
                 tableServicio.refresh();
             }
-
         } catch (IOException | SQLException e) {
             AlertaUtil.mostrarError("Error al abrir formulario: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void cerrarVentana() {
+        Stage stage = (Stage) tableServicio.getScene().getWindow();
+        stage.close();
     }
 }

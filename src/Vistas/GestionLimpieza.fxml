@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="450.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.GestionLimpiezaController">
+    <stylesheets>
+        <URL value="@/Styles/gestionlimpieza.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="248.0" layoutY="75.0" prefHeight="500.0" prefWidth="450.0" styleClass="mainFxmlClass" stylesheets="@../Styles/gestionlimpieza.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="450.0">
+               <children>
+                  <Label styleClass="label-title" text="GESTIÓN DE LIMPIEZA DE HABITACIÓN">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="381.0" prefWidth="450.0" spacing="5.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label styleClass="label-content-subtitle" text="Información de la Habitación:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="140.0" styleClass="label-content" text="Nº Habitación:" />
+                        <TextField fx:id="textNumeroHabitacion" editable="false" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="140.0" styleClass="label-content" text="Tipo de Habitación:" />
+                        <TextField fx:id="textTipoHabitacion" editable="false" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="140.0" styleClass="label-content" text="Estado General:" />
+                        <TextField fx:id="textEstadoGeneral" editable="false" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="120.0" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="140.0" styleClass="label-content" text="Estado de Limpieza:" />
+                        <ComboBox fx:id="cboxEstadoLimpieza" prefHeight="27.0" prefWidth="244.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="176.0" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="140.0" styleClass="label-content" text="Prioridad de Limpieza:" />
+                        <ComboBox fx:id="cBoxPrioridadLimpieza" prefHeight="27.0" prefWidth="240.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="231.0" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="120.0" styleClass="label-content" text="Última Limpieza:" />
+                        <Label prefHeight="18.0" prefWidth="44.0" styleClass="label-content" text="Fecha:" />
+                        <DatePicker fx:id="DateFechaUltimaLimpieza" prefHeight="26.0" prefWidth="120.0" styleClass="date-picker" HBox.hgrow="ALWAYS" />
+                        <Label styleClass="label-content" text="Hora: ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="textHoraUltimaLimpieza" editable="false" prefHeight="26.0" prefWidth="50.0" promptText="00:00" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="234.0" prefHeight="40.0" prefWidth="450.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="120.0" styleClass="label-content" text="Próxima Limpieza:" />
+                        <Label prefHeight="18.0" prefWidth="44.0" styleClass="label-content" text="Fecha:" />
+                        <DatePicker fx:id="DateFechaProximaLimpieza" prefHeight="26.0" prefWidth="120.0" styleClass="date-picker" HBox.hgrow="ALWAYS" />
+                        <Label styleClass="label-content" text="Hora: ">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="textHoraProximaLimpieza" prefHeight="26.0" prefWidth="50.0" promptText="00:00" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="337.0" prefHeight="100.0" prefWidth="380.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="120.0" styleClass="label-content" text="Notas de Limpieza:" />
+                        <TextArea fx:id="textAreaNotaLimpieza" prefHeight="62.0" prefWidth="230.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="410.0" spacing="15.0">
+               <children>
+                  <Button fx:id="btnMarcarComoLimpia" mnemonicParsing="false" onAction="#marcarComoLimpia" prefHeight="35.0" prefWidth="150.0" text="Marcar como LIMPIA" />
+                  <Button fx:id="btnProgrmarLimpieza" mnemonicParsing="false" onAction="#programarLimpieza" prefHeight="35.0" prefWidth="150.0" text="Programar Limpieza" />
+                  <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelar" prefHeight="35.0" prefWidth="80.0" text="Cancelar" />
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

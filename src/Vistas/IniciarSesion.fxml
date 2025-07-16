@@ -13,10 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.IniciarSesionController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #f3deff;" HBox.hgrow="ALWAYS">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" styleClass="login-form-panel" stylesheets="@../Styles/iniciarsesion.css" HBox.hgrow="ALWAYS">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="SOMETIMES">
                <children>
@@ -25,14 +24,14 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="275.0" text="Iniciar sesión" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="275.0" styleClass="login-title" text="Iniciar sesión" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="36.0" />
                            </font>
                         </Label>
                      </children>
                   </StackPane>
-                  <Label text="Usuario: " VBox.vgrow="ALWAYS">
+                  <Label styleClass="login-label" text="Usuario: " VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -42,12 +41,12 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label text="Contraseña:" VBox.vgrow="ALWAYS">
+                  <Label styleClass="login-label" text="Contraseña:" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <StackPane maxHeight="35.0" prefHeight="35.0" prefWidth="230.0">
+                  <StackPane maxHeight="35.0" prefHeight="35.0" prefWidth="230.0" styleClass="password-stack">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -56,13 +55,13 @@
                         <PasswordField fx:id="PasswContraseña" prefHeight="30.0" />
                      </children>
                   </StackPane>
-                  <CheckBox fx:id="CBoxMostrarContraseña" mnemonicParsing="false" onAction="#mostrarContraseña" text="Mostrar contraseña" VBox.vgrow="ALWAYS" />
+                  <CheckBox fx:id="CBoxMostrarContraseña" mnemonicParsing="false" onAction="#mostrarContraseña" styleClass="login-checkbox" text="Mostrar contraseña" VBox.vgrow="ALWAYS" />
                   <StackPane maxHeight="40.0" prefHeight="40.0" prefWidth="190.0">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0" />
                      </VBox.margin>
                      <children>
-                        <Button fx:id="btnIngresar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ingresar" prefHeight="26.0" prefWidth="247.0" text="Ingresar" />
+                        <Button fx:id="btnIngresar" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ingresar" prefHeight="26.0" prefWidth="247.0" styleClass="login-button" text="Ingresar" />
                      </children>
                   </StackPane>
                </children>
@@ -72,7 +71,7 @@
             <Insets bottom="40.0" left="35.0" right="35.0" top="40.0" />
          </padding>
       </VBox>
-      <VBox alignment="CENTER" prefHeight="402.0" prefWidth="300.0" style="-fx-background-color: #37206A;" HBox.hgrow="ALWAYS">
+      <VBox alignment="CENTER" prefHeight="402.0" prefWidth="300.0" styleClass="login-image-panel" stylesheets="@../Styles/iniciarsesion.css" HBox.hgrow="ALWAYS">
          <children>
             <ImageView fitHeight="300.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -7,8 +7,5 @@ package Enums;
  */
 public enum RolUsuario {
     ADMIN,
-    RECEPCIONISTA,
-    LIMPIEZA,
-    MANTENIMIENTO
-
+    RECEPCIONISTA
 }

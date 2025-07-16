@@ -46,9 +46,6 @@ public class HabitacionesDAO {
             + "WHERE t.nombre = ? "
             + "ORDER BY h.numhabitacion";
 
-    /**
-     * Lista todas las habitaciones sin filtrar por estado
-     */
     public List<Habitacion> listarHabitaciones() throws SQLException {
         List<Habitacion> habitaciones = new ArrayList<>();
 
@@ -61,9 +58,6 @@ public class HabitacionesDAO {
         return habitaciones;
     }
 
-    /**
-     * Filtra habitaciones por tipo (incluyendo todas sin importar estado)
-     */
     public List<Habitacion> filtrarPorTipo(TipoHabitacion tipo) throws SQLException {
         List<Habitacion> habitaciones = new ArrayList<>();
 
@@ -80,9 +74,6 @@ public class HabitacionesDAO {
         return habitaciones;
     }
 
-    /**
-     * Eliminación lógica (marca habitación como en mantenimiento)
-     */
     public boolean eliminarHabitacion(int numeroHabitacion) throws SQLException {
         try (Connection conn = ConexionPostgreSQL.getInstance().getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_DELETE)) {
 
@@ -91,9 +82,6 @@ public class HabitacionesDAO {
         }
     }
 
-    /**
-     * Actualiza los datos de una habitación
-     */
     public boolean actualizarHabitacion(Habitacion habitacion) throws SQLException {
         try (Connection conn = ConexionPostgreSQL.getInstance().getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE)) {
 
@@ -107,9 +95,6 @@ public class HabitacionesDAO {
         }
     }
 
-    /**
-     * Inserta una nueva habitación
-     */
     public boolean insertarHabitacion(Habitacion habitacion) throws SQLException {
         try (Connection conn = ConexionPostgreSQL.getInstance().getConnection(); PreparedStatement stmt = conn.prepareStatement(SQL_INSERT)) {
 
@@ -123,9 +108,6 @@ public class HabitacionesDAO {
         }
     }
 
-    /**
-     * Mapea un ResultSet a un objeto Habitacion
-     */
     private Habitacion mapearHabitacion(ResultSet rs) throws SQLException {
         Habitacion habitacion = new Habitacion();
         habitacion.setNumero(rs.getInt("numhabitacion"));
@@ -136,9 +118,6 @@ public class HabitacionesDAO {
         return habitacion;
     }
 
-    /**
-     * Busca una habitación por su número.
-     */
     public Habitacion buscarPorNumero(int numero) throws SQLException {
         String sql = "SELECT h.numhabitacion, t.nombre AS tipo, h.precio, h.detalles, e.nombre AS estado "
                 + "FROM habitacion h "
@@ -153,6 +132,27 @@ public class HabitacionesDAO {
             }
         }
         return null;
+    }
+    
+    
+
+    public List<Habitacion> listarHabitacionesEnLimpieza() throws SQLException {
+        String sql = """
+                     SELECT h.numhabitacion, t.nombre AS tipo, h.precio, h.detalles, e.nombre AS estado 
+                                      FROM habitacion h 
+                                      JOIN tipohabitacion t ON h.idtipohabitacion = t.idtipohabitacion 
+                                      JOIN estadohabitacion e ON h.idestado = e.idestado 
+                                      WHERE e.nombre = 'EN_LIMPIEZA' OR e.nombre ='MANTENIMIENTO';
+                     """;
+
+        List<Habitacion> habitaciones = new ArrayList<>();
+        try (Connection conn = ConexionPostgreSQL.getInstance().getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                habitaciones.add(mapearHabitacion(rs));
+            }
+        }
+        return habitaciones;
     }
 
 }

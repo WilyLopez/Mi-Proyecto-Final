@@ -1,6 +1,6 @@
 package CRUD;
 
-import Modelo.DealleReserva;
+import Modelo.DetalleReserva;
 import ConexionPostgreSQL.ConexionPostgreSQL;
 import Enums.TipoItem;
 import java.sql.*;
@@ -19,7 +19,7 @@ public class DetallesReservaDAO {
         this.conn = ConexionPostgreSQL.getInstance().getConnection();
     }
 
-    public boolean insertar(DealleReserva detalle) {
+    public boolean insertar(DetalleReserva detalle) {
         String sql = "INSERT INTO DetalleReservaItem (IdReserva, IdTipoItem, IdItem, Cantidad, PrecioUnitario) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, detalle.getIdReserva());
@@ -34,18 +34,32 @@ public class DetallesReservaDAO {
         }
     }
 
-    public List<DealleReserva> listarPorIdReserva(int idReserva) {
-        List<DealleReserva> lista = new ArrayList<>();
-        String sql = "SELECT * FROM DetalleReservaItem WHERE IdReserva = ?";
+    public List<DetalleReserva> listarPorIdReserva(int idReserva) {
+        List<DetalleReserva> lista = new ArrayList<>();
+        String sql = """
+                     SELECT 
+                         dri.IdDetalle,
+                         dri.IdReserva,
+                         dri.IdTipoItem,
+                         dri.IdItem,
+                         dri.Cantidad,
+                         dri.PrecioUnitario,
+                         COALESCE(p.Nombre, s.Nombre) AS NombreItem
+                     FROM DetalleReservaItem dri
+                     LEFT JOIN Producto p ON dri.IdTipoItem = 1 AND p.IdProducto = dri.IdItem
+                     LEFT JOIN Servicio s ON dri.IdTipoItem = 2 AND s.IdServicio = dri.IdItem
+                     WHERE dri.IdReserva = ?
+                     """;
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idReserva);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                DealleReserva detalle = new DealleReserva(
+                DetalleReserva detalle = new DetalleReserva(
                         rs.getInt("IdDetalle"),
                         rs.getInt("IdReserva"),
                         TipoItem.values()[rs.getInt("IdTipoItem") - 1],
                         rs.getInt("IdItem"),
+                        rs.getString("NombreItem"),
                         rs.getInt("Cantidad"),
                         rs.getDouble("PrecioUnitario")
                 );

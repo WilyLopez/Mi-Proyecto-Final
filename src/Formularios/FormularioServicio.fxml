@@ -11,29 +11,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="350.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FormularioServicioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="300.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FormularioServicioController">
     <stylesheets>
         <URL value="@/Styles/formularioservicio.css" />
     </stylesheets>
    <children>
-      <VBox layoutX="52.0" layoutY="54.0" prefHeight="400.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="52.0" layoutY="54.0" prefHeight="400.0" prefWidth="350.0" styleClass="mainFxmlClass" stylesheets="@../Styles/formularioservicio.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="74.0" prefWidth="290.0">
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="250.0">
                <children>
-                  <Label text="Servicios">
+                  <Label styleClass="label-titulo" text="Servicios">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <Label text="Nombre: ">
+            <Label styleClass="label-content" text="Nombre: ">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="textNombre" prefHeight="30.0" />
-            <Label text="Descripción:">
+            <Label styleClass="label-content" text="Descripción:">
                <font>
                   <Font size="14.0" />
                </font>
@@ -41,8 +41,8 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="textDescripcion" prefHeight="60.0" prefWidth="290.0" />
-            <Label text="Precio: ">
+            <TextArea fx:id="textDescripcion" prefHeight="92.0" prefWidth="250.0" />
+            <Label styleClass="label-content" text="Precio: ">
                <font>
                   <Font size="14.0" />
                </font>
@@ -51,7 +51,7 @@
                </VBox.margin>
             </Label>
             <TextField fx:id="textPrecio" prefHeight="30.0" />
-            <HBox alignment="CENTER" prefHeight="46.0" prefWidth="290.0" spacing="15.0">
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="260.0" spacing="15.0">
                <children>
                   <Button fx:id="btnAgregarAlFinal" mnemonicParsing="false" onAction="#agregarAlfinal" prefHeight="35.0" prefWidth="120.0" text="Agregar al final">
                      <font>
@@ -71,7 +71,4 @@
          </children>
       </VBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
-   </padding>
 </AnchorPane>

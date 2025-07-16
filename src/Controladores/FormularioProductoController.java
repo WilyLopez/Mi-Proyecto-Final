@@ -1,5 +1,6 @@
 package Controladores;
 
+import Util.AlertaUtil;
 import CRUD.ProductoDAO;
 import Modelo.Producto;
 import javafx.event.ActionEvent;
@@ -108,5 +109,7 @@ public class FormularioProductoController {
     public String getNombre() {
         return txtNombreProducto.getText().trim();
     }
+    
+    
 
 }

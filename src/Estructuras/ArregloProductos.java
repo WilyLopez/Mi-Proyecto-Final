@@ -2,6 +2,7 @@ package Estructuras;
 
 import Modelo.Producto;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  *
@@ -18,7 +19,7 @@ public class ArregloProductos {
         tamaño = 0;
     }
 
-    // Insertar un producto (al final)
+    // Insertar un producto al final
     public void insertar(Producto producto) {
         if (tamaño >= productos.length) {
             productos = Arrays.copyOf(productos, productos.length * 2);
@@ -26,7 +27,7 @@ public class ArregloProductos {
         productos[tamaño++] = producto;
     }
 
-    // Eliminación lógica (cambia un campo `activo` a false si se implementa)
+    // Eliminación lógica
     public boolean eliminarPorId(int id) {
         for (int i = 0; i < tamaño; i++) {
             if (productos[i] != null && productos[i].getIdProducto() == id) {
@@ -37,7 +38,7 @@ public class ArregloProductos {
         return false;
     }
 
-    // Buscar por ID usando búsqueda binaria (requiere ordenar primero)
+    // Buscar por ID usando busqueda binaria
     public Producto buscarPorId(int id) {
         int izquierda = 0, derecha = tamaño - 1;
         while (izquierda <= derecha) {
@@ -57,7 +58,7 @@ public class ArregloProductos {
         return null;
     }
 
-    // Mostrar productos activos (no nulos)
+    // Mostrar productos activos
     public void mostrar() {
         for (int i = 0; i < tamaño; i++) {
             if (productos[i] != null) {
@@ -73,5 +74,18 @@ public class ArregloProductos {
     public int getTamaño() {
         return tamaño;
     }
-
+    
+    public void ordenarPorNombre() {
+        Arrays.sort(productos, 0, tamaño, Comparator.comparing(Producto::getNombre));
+    }
+    
+    public void ordenarPorPrecio() {
+        Arrays.sort(productos, 0, tamaño, Comparator.comparingDouble(Producto::getPrecio));
+    }
+    
+    public void ordenarPorPrecioDescendente() {
+        Arrays.sort(productos, 0, tamaño, Comparator.comparingDouble(Producto::getPrecio).reversed());
+    }
+    
+    
 }

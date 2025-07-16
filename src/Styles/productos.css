@@ -1,7 +1,151 @@
-/*
- * Empty Stylesheet file.
- */
-
 .mainFxmlClass {
+    -fx-background-color: #1e1e2f;
+}
 
+.label-titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffeb81; 
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.combo-box {
+    -fx-background-color: #2c2c3e;
+    -fx-border-color: #444;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 4px;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #2c2c3e;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #2c2c3e;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #3a3a4f;
+}
+
+
+.table-view {
+    -fx-background-color: #1e1e2f;
+    -fx-border-color: #3f3f5a;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #26263c;
+}
+.table-view .table-row-cell:odd {
+    -fx-background-color: #2e2e4a;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: #8457b9;
+    -fx-text-fill: #0d0c0e;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: white;
+    -fx-padding: 6px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #555170;
+    -fx-border-color: transparent;
+    -fx-background-radius: 6 6 0 0;
+}
+.table-view .column-header {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+}
+
+
+#btnDeshacer {
+    -fx-background-color: #ffe066;
+    -fx-text-fill: #2f2f2f;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnDeshacer:hover {
+    -fx-background-color: #ffdd57;
+}
+
+#btnRehacer {
+    -fx-background-color: #70d6ff;
+    -fx-text-fill: #2f2f2f;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnRehacer:hover {
+    -fx-background-color: #4dc3ff;
+}
+
+#btnEditarProducto {
+    -fx-background-color: #ffd166;
+    -fx-text-fill: #2a2a2a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnEditarProducto:hover {
+    -fx-background-color: #fcbf49;
+}
+
+#btnEliminarProducto {
+    -fx-background-color: #ef476f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnEliminarProducto:hover {
+    -fx-background-color: #d62839;
+}
+
+#btnAgregarProducto {
+    -fx-background-color: #06d6a0;
+    -fx-text-fill: #1a1a1a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnAgregarProducto:hover {
+    -fx-background-color: #00b386;
+}
+
+
+#btnAgregarAReserva {
+    -fx-background-color: #3c92ff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+#btnAgregarAReserva:hover {
+    -fx-background-color: #2977d3;
 }

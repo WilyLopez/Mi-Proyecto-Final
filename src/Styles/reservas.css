@@ -3,5 +3,199 @@
  */
 
 .mainFxmlClass {
-
+    -fx-background-color: #1e1e2f;
+    -fx-padding: 10px;
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
 }
+
+.label.titulo-principal {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffeb81;
+}
+
+.label-subTitulo{
+    -fx-font-size: 15px;
+    -fx-text-fill: #fff;
+}
+
+.label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #fff;
+}
+
+.text-field {
+    -fx-background-color: #2d2d40;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #444;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 8 5 8;
+}
+
+
+.table-view {
+    -fx-background-color: #2b2b3d;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10;
+    -fx-border-color: #444;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #3a3a4d;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #dddddd;
+    -fx-font-size: 12px;
+}
+
+.date-picker {
+    -fx-background-color: #2d2d40;
+    -fx-text-fill: white;
+    -fx-border-color: #555;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #4c4177;
+}
+
+
+/*botones*/
+
+#btnCancelar {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.4), 8, 0.2, 0, 2);
+}
+#btnCancelar:hover {
+    -fx-background-color: #c0392b;
+}
+
+#btnRegistrarReservas {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(39, 174, 96, 0.4), 8, 0.2, 0, 2);
+}
+#btnRegistrarReservas:hover {
+    -fx-background-color: #229954;
+}
+
+#btnAgregarProducto {
+    -fx-background-color: #8e44ad;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(142, 68, 173, 0.3), 8, 0.2, 0, 2);
+}
+#btnAgregarProducto:hover {
+    -fx-background-color: #732d91;
+}
+
+#btnAgregarServicio {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.4), 8, 0.2, 0, 2);
+}
+#btnAgregarServicio:hover {
+    -fx-background-color: #2980b9;
+}
+
+#btnVerReservas {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: #1e1e1e;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(243, 156, 18, 0.3), 8, 0.2, 0, 2);
+}
+#btnVerReservas:hover {
+    -fx-background-color: #d68910;
+}
+
+#btnSelecionarHabitacion {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(52, 73, 94, 0.4), 8, 0.2, 0, 2);
+}
+#btnSelecionarHabitacion:hover {
+    -fx-background-color: #2c3e50;
+}
+
+/* ====== TABLA DE PRODUCTOS Y SERVICIOS ====== */
+
+#TableProductoOServicio {
+    -fx-background-color: #1e1e2f;              
+    -fx-border-color: #3f3f5a;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0.2, 0, 2);
+}
+
+/* Filas */
+#TableProductoOServicio .table-row-cell {
+    -fx-background-color: #26263c;
+    -fx-border-color: transparent;
+}
+#TableProductoOServicio .table-row-cell:odd {
+    -fx-background-color: #2e2e4a;
+}
+#TableProductoOServicio .table-row-cell:selected {
+    -fx-background-color: #8457b9;
+    -fx-text-fill: #0d0c0e;
+}
+
+/* Celdas */
+#TableProductoOServicio .table-cell {
+    -fx-text-fill: #ffffff;
+    -fx-padding: 6px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Cabecera */
+#TableProductoOServicio .column-header-background {
+    -fx-background-color: #555170;
+    -fx-border-color: transparent;
+    -fx-background-radius: 6 6 0 0;
+}
+#TableProductoOServicio .column-header {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+}
+

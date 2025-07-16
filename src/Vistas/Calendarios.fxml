@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.CalendariosController">
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="700.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.CalendariosController">
     <stylesheets>
-        <URL value="@/Styles/calendarios.css"/>
+        <URL value="@/Styles/calendarios.css" />
     </stylesheets>
+   <children>
+      <VBox layoutX="328.0" layoutY="124.0" prefHeight="530.0" prefWidth="700.0" styleClass="mainFxmlClass" stylesheets="@../Styles/calendarios.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="67.0" prefWidth="700.0">
+               <children>
+                  <Label styleClass="label-titulo" text="Calendario">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="51.0" prefWidth="644.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="700.0" spacing="15.0">
+                     <children>
+                        <Button fx:id="btnMesAnterior" mnemonicParsing="false" onAction="#mostrarMesAnterior" prefHeight="35.0" prefWidth="120.0" text="Anterior">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="textMes" prefHeight="35.0" prefWidth="200.0" />
+                        <Button fx:id="btnMesSiguiente" mnemonicParsing="false" onAction="#mostraMesSiguiente" prefHeight="35.0" prefWidth="120.0" text="Siguiente">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox fx:id="HBoxContenedorGrigPane" prefHeight="340.0" prefWidth="644.0" VBox.vgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="30.0" right="30.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
 </AnchorPane>

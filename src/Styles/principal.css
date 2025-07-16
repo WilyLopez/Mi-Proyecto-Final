@@ -2,6 +2,74 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+.main-border-pane {
+    -fx-background-color: #1a182b;
+}
 
+.main-content {
+    -fx-background-color: #242038;
+}
+
+.top-bar {
+    -fx-background-color: #2d2548;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.side-menu {
+    -fx-background-color: #2d2548;
+    -fx-padding: 15 0 15 0;
+}
+
+.logo {
+    -fx-effect: dropshadow(gaussian, #00000099, 10, 0.3, 0, 1);
+    -fx-cursor: hand;
+}
+
+.top-name-hotel {
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-padding: 0 0 0 10;
+}
+
+.top-name-user {
+    -fx-text-fill: #eeeeee;
+    -fx-font-weight: bold;
+}
+
+.top-text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #FFD700;
+    -fx-border-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-padding: 10 10 10 20;
+    -fx-cursor: hand;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-spacing: 10;
+    -fx-transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    -fx-background-color: #44315c;
+}
+
+.menu-item.selected {
+    -fx-background-color: #4b3a73;
+    -fx-text-fill: #ffd700;
+    -fx-font-weight: bold;
+}
+
+.menu-icon {
+    -fx-opacity: 0.8;
+    -fx-margin: 0 10 0 0;
 }

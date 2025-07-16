@@ -19,13 +19,13 @@
         <URL value="@/Styles/servicios.css" />
     </stylesheets>
    <children>
-      <BorderPane layoutX="198.0" layoutY="129.0" prefHeight="476.0" prefWidth="719.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutX="198.0" layoutY="129.0" prefHeight="476.0" prefWidth="719.0" styleClass="mainFxmlClass" stylesheets="@../Styles/servicios.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="704.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="685.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Registro de Servicios">
+                  <Label style="-fx-text-fill: #ffeb81;" styleClass="label-titulo" stylesheets="@../Styles/servicios.css" text="Registro de Servicios">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font />
                      </font>
                   </Label>
                </children>
@@ -60,47 +60,55 @@
                <children>
                   <HBox prefHeight="50.0" prefWidth="704.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="352.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="262.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="Buscar: ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="textNombreServicio" prefHeight="26.0" prefWidth="183.0" />
+                              <TextField fx:id="textNombreServicio" prefHeight="26.0" prefWidth="183.0" styleClass="text-field" />
                            </children>
                            <HBox.margin>
                               <Insets left="15.0" right="30.0" />
                            </HBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="352.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="374.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <HBox.margin>
-                              <Insets right="30.0" />
+                              <Insets />
                            </HBox.margin>
                            <children>
-                              <Label text="Ordenar Por: ">
+                              <Label prefHeight="20.0" prefWidth="110.0" text="Ordenar Por: ">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="cboxOrdenarPor" prefWidth="150.0" />
+                              <ComboBox fx:id="cboxOrdenarPor" prefWidth="150.0" styleClass="combo-box" />
+                              <Button fx:id="btnAgregarAReserva" mnemonicParsing="false" onAction="#agregarServicioAReserva" prefHeight="26.0" prefWidth="141.0" text="Agregar a Reserva" visible="false">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                      </children>
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets />
                      </VBox.margin>
                   </HBox>
                   <TableView fx:id="tableServicio" prefHeight="301.0" prefWidth="704.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn fx:id="ColumnNumero" maxWidth="120.0" minWidth="60.0" prefWidth="60.0" text="N°" />
-                      <TableColumn fx:id="ColumnNombre" maxWidth="240.0" minWidth="120.0" prefWidth="137.60004425048828" text="Nombre" />
-                        <TableColumn fx:id="ColumnDescripcion" maxWidth="400.0" minWidth="275.0" prefWidth="280.0" text="Descripción" />
-                        <TableColumn fx:id="ColumnPrecio" maxWidth="240.0" minWidth="140.0" prefWidth="140.0" text="Precio" />
+                      <TableColumn fx:id="ColumnNumero" maxWidth="1.7976931348623157E308" minWidth="60.0" prefWidth="60.0" text="N°" />
+                      <TableColumn fx:id="ColumnNombre" maxWidth="1.7976931348623157E308" minWidth="120.0" prefWidth="137.60004425048828" text="Nombre" />
+                        <TableColumn fx:id="ColumnDescripcion" maxWidth="1.7976931348623157E308" minWidth="275.0" prefWidth="280.0" text="Descripción" />
+                        <TableColumn fx:id="ColumnPrecio" maxWidth="1.7976931348623157E308" minWidth="140.0" prefWidth="140.0" text="Precio" />
                     </columns>
                      <VBox.margin>
                         <Insets left="15.0" right="30.0" top="10.0" />
                      </VBox.margin>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                </children>
                <BorderPane.margin>
@@ -111,9 +119,9 @@
                </padding>
             </VBox>
          </center>
+         <padding>
+            <Insets bottom="15.0" left="15.0" top="15.0" />
+         </padding>
       </BorderPane>
    </children>
-   <padding>
-      <Insets left="15.0" top="20.0" />
-   </padding>
 </AnchorPane>

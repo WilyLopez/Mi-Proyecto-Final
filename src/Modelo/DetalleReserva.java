@@ -1,27 +1,35 @@
 package Modelo;
 
 import Enums.TipoItem;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  *
  * @author Wilian Lopez
  */
-public class DealleReserva {
+public class DetalleReserva {
 
     private int idDetalle;
     private int idReserva;
     private TipoItem tipoItem;
     private int idItem;
-    private int cantidad;
+    private String nombreItem;
     private double precioUnitario;
 
-    public DealleReserva(int idDetalle, int idReserva, TipoItem tipoItem, int idItem, int cantidad, double precioUnitario) {
+    private SimpleIntegerProperty cantidad;
+
+    public DetalleReserva(int idDetalle, int idReserva, TipoItem tipoItem, int idItem, String nombreItem, int cantidad, double precioUnitario) {
         this.idDetalle = idDetalle;
         this.idReserva = idReserva;
         this.tipoItem = tipoItem;
         this.idItem = idItem;
-        this.cantidad = cantidad;
+        this.nombreItem = nombreItem;
+        this.cantidad = new SimpleIntegerProperty(cantidad);
         this.precioUnitario = precioUnitario;
+    }
+
+    public DetalleReserva(TipoItem tipoItem, int idItem, String nombreItem, int cantidad, double precioUnitario) {
+        this(0, 0, tipoItem, idItem, nombreItem, cantidad, precioUnitario);
     }
 
     public int getIdDetalle() {
@@ -56,15 +64,20 @@ public class DealleReserva {
         this.idItem = idItem;
     }
 
+    public String getNombreItem() {
+        return nombreItem;
+    }
+
+    public void setNombreItem(String nombreItem) {
+        this.nombreItem = nombreItem;
+    }
+
     public int getCantidad() {
-        return cantidad;
+        return cantidad.get();
     }
 
     public void setCantidad(int cantidad) {
-        if (cantidad <= 0) {
-            throw new IllegalArgumentException("Cantidad debe ser mayor que 0");
-        }
-        this.cantidad = cantidad;
+        this.cantidad.set(cantidad);
     }
 
     public double getPrecioUnitario() {
@@ -79,6 +92,15 @@ public class DealleReserva {
     }
 
     public double calcularSubtotal() {
-        return cantidad * precioUnitario;
+        return getCantidad() * precioUnitario;
+    }
+
+    @Override
+    public String toString() {
+        return tipoItem + " - " + nombreItem + " x" + cantidad;
+    }
+
+    public SimpleIntegerProperty cantidadProperty() {
+        return cantidad;
     }
 }
